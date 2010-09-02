@@ -71,8 +71,17 @@
       margin-top: -50px;
       position: absolute;
       top: 0%; left: 0%;
-      background-color: #000;
+      background-color: transparent;
       z-index: 1;
+    }
+    
+    #shadow {
+      position: absolute;
+      top: 0%; left: 0%;
+      background-color: #000;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
     
     #galleria {
@@ -90,8 +99,8 @@
       position: absolute;
       border: 1px solid #333;
       background-color: #222;
-      -moz-border-radius: 8px;
-      -webkit-border-radius: 8px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
       color: #777;
       height: 30px;
       width: 100px;
@@ -111,10 +120,10 @@
     
     .galleryButton {
       opacity: 0.5;
-      border: 1px solid #73a98c;
-      background-color: #8ebaa2;
-      -moz-border-radius: 8px;
-      -webkit-border-radius: 8px;
+      border: 1px solid #000;
+      background-color: #333;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
       color: #FFF;
       font-weight: bold;
       font-size: .8em;
@@ -142,13 +151,93 @@
     #likebutton {
       margin: 10px 10px 0px;
     }
+    
+    #aboutme {
+      position: absolute;
+      width: 800px;
+      border: 5px solid #77a78e;
+      background-color: #8db8a1;
+      -webkit-border-radius: 15px;
+      -moz-border-radius: 15px;
+      padding: 15px;
+      top: 50%;
+      left: 50%;
+      margin-top: -150px;
+      margin-left: -400px;
+      display: none;
+      font-size: 1em;
+      line-height: 1.3em;
+      letter-spacing: 0.06em;
+      font-family: "Tahoma";
+      color :#FFF;
+    }
+    
+    #contact {
+      position: absolute;
+      width: 800px;
+      border: 5px solid #9d4e91;
+      background-color: #c992c1;
+      -webkit-border-radius: 15px;
+      -moz-border-radius: 15px;
+      padding: 15px;
+      top: 50%;
+      left: 50%;
+      margin-top: -150px;
+      margin-left: -400px;
+      display: none;
+      font-size: 1em;
+      line-height: 1.3em;
+      letter-spacing: .12em;
+      font-family: "Tahoma";
+      color :#FFF;
+    }    
+    
+    #contact a {
+      text-decoration: none;      
+      color: #FFF;
+      font-weight: bold;
+    }
+    
+    #contact a:hover {
+      color: #777;
+    }
+    
+    #aboutme h3 { margin-top: 0px; }
+    #aboutmeImage, #contactImage { margin-right: 20px; border: 1px solid #FFF; padding: 3px; }
   </style>
 </head>
 <body>
 <div id="overlay">
-  <div id="galleryName"></div>
-  <div id="galleria"></div> 
-  <input type="button" id="close" value="Close" onclick="closeGallery();" />
+  <div id="galleryName"></div>  
+  <div id="shadow">
+  </div>    
+  <div id="gallery">
+    <div id="galleria"></div> 
+  </div>
+  <div id="aboutme">
+    <img id="aboutmeImage" src="images/aboutme.jpg" align="left" />
+<h3><b>I love...</b></h3>
+Jesus...<br/>
+Snuggling with my two handsome boys...<br/>
+Buying a pretty pair of shoes that I will probably never wear...<br/>
+Mastering incredibly complicated recipes...<br/>
+Church on a Sunday morning...<br/>
+Window shopping in my underwear...online...<br/>
+Any thing, object, or article in the beautiful shade of green...<br/>
+Watching my wedding video every year with the hubs on our anniversary...<br/>
+Seeing people's reaction when I tell them how many siblings I have...<br/>
+Watching my baby boy sleep...<br/>
+White chocolate anything...<br/>
+Meeting wonderful people and then getting to take their picture...<br/>
+  </div>
+  <div id="contact">
+    <img id="contactImage" src="images/contact.jpg" align="left" />    
+    Dana Murphy<br/>
+    (318) 792-4094<br/>
+    <b>dana</b> at <b>dmphotography</b> dot <b>me</b><br/><br/>
+    You can also send me a <a href="http://www.facebook.com/dmphotography.me" target="_blank">facebook</a> message!
+  </div>
+  <input type="button" id="close" value="Close" onclick="closeOverlay();" />
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script src="galleria/galleria.js"></script>
@@ -156,15 +245,26 @@
 <script>
   Galleria.loadTheme('galleria/themes/classic/galleria.classic.js');
 
-  var albums = [ 155533561124914 , 155530174458586 ];
+  var albums = [ 155533561124914 , 155530174458586 , 155643997780537];
   var albumNames = [ "Kids" , "Family" , "Love" ];
-  
-  function showGallery(num) {
 
+  function hideOverlay(cb) {
     $('#overlay').animate({
       'margin-top': '-2000px'
-    },500, function() {} );    
-    
+    },500, function() { if(cb) cb(); } );        
+  };
+  
+  function showOverlay(cb) {
+    $('#overlay').css('margin-top','-2000px');
+    $('#overlay').show();    
+    $('#overlay').animate({
+      'margin-top': '-50px'
+    },500, function() { if(cb) cb(); });    
+  };
+  
+  function showGallery(num) {
+    hideOverlay();
+    $('#gallery').show();
     var url = 'http://graph.facebook.com/' + albums[num] + '/photos?callback=?';
     $.getJSON(
       url,
@@ -183,13 +283,10 @@
           photos.push(photo);
         }
 
-        $('#overlay').css('margin-top','-2000px');
-        $('#overlay').show();
         $('#galleryName').html(albumNames[num]);
         $('#galleryButtons').show();
-        $('#overlay').animate({
-          'margin-top': '-50px'
-        },500, function() {});
+        $('#shadow').css('opacity','1');        
+        showOverlay(); 
         
         $('#galleria').galleria({
           autoplay: true,
@@ -201,33 +298,46 @@
     });  
   };
   
-  function closeGallery() {
+  function showAboutMe() {
+    $('#galleryName').html("About Me");    
+    $('#shadow').css('opacity','1');
+    $('#aboutme').show();  
+    showOverlay();
+  };
+  
+  function showContact() {
+    $('#galleryName').html("Contact");        
+    $('#shadow').css('opacity','1');
+    $('#contact').show();  
+    showOverlay();
+  };
+    
+  function closeOverlay() {
+    $('#gallery').hide();
+    $('#aboutme').hide();
+    $('#contact').hide();    
     $('#galleryButtons').hide();        
-    $('#overlay').animate({
-      'margin-top': '-2000px'
-    },500, function() { 
-      $('#galleria').html('');
-      $('#overlay').hide();
-    });
-  }
+    hideOverlay();
+  };
+  
 </script>
 <iframe id="likebutton" src="http://www.facebook.com/plugins/like.php?href=http://dmphotography.me&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
 <center>
   <div id="logo">
     <img id="logo" src="images/logo.png" /><br/>
     <div id="navbar">
-      about me &middot;
-      contact &middot;
+      <a href="#" onclick="showAboutMe(); return false;">about me</a> &middot;
+      <a href="#" onclick="showContact(); return false;">contact</a> &middot;
       pricing &middot;
       <a href="http://www.facebook.com/dmphotography.me" target="_blank">facebook</a> &middot;
-      <a href="#" onclick="showGallery(0); return false;">gallery</a>
+      <a href="#" onclick="showGallery(1); return false;">gallery</a>
     </div>
   </div>
 </center>
 <div id="bottom">
   <div id="galleryButtons">
+      <input type="button" class="galleryButton" value="Family" onclick="showGallery(1);" />          
       <input type="button" class="galleryButton" value="Kids" onclick="showGallery(0);" />
-      <input type="button" class="galleryButton" value="Family" onclick="showGallery(1);" />      
       <input type="button" class="galleryButton" value="Love" onclick="showGallery(2);" />            
   </div>
 </div>
