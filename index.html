@@ -7,6 +7,16 @@
     body {
       width: 100%; height: 100%; 
       margin: 0px; padding: 0px;
+      background: -webkit-gradient(
+        linear, center top, center bottom,
+        color-stop(.3, #FFF),
+        color-stop(1, #CCC)      
+        );
+      background: -moz-linear-gradient(
+        center top,
+        #FFF 30%,      
+        #CCC 100%
+      );       
     }
     div#logo {
       position: absolute;
@@ -23,9 +33,18 @@
     #navbar {
       border-top: 1px solid #DEDEDE;
       padding-top: 10px;
-      color: #CCC;
+      color: #AAA;
     }
     
+    #navbar a {
+      text-decoration: none;
+      color: #AAA;
+    }
+    
+    #navbar a:hover {
+      text-decoration: none;
+      color: #777;
+    }
     #bottom {
       position: absolute;
       top: 100%;
@@ -33,19 +52,184 @@
       height: 50px;
       margin-top: -50px;
       background-color: #8cbaa4;
+      background: -webkit-gradient(
+        linear, center top, center bottom,
+        color-stop(0, #8cbaa4),
+        color-stop(1, #73a68f)      
+        );
+      background: -moz-linear-gradient(
+        center top,
+        #8cbaa4 0%,      
+        #73a68f 100%
+      );             
+    }
+    
+    #overlay {
+      display: none;
+      width: 100%;
+      height: 100%;
+      margin-top: -50px;
+      position: absolute;
+      top: 0%; left: 0%;
+      background-color: #000;
+      z-index: 1;
+    }
+    
+    #galleria {
+      position: relative;
+      top: 50%;
+      margin-top: -200px;
+      left: 50%;
+      margin-left: -400px;  
+      width: 800px;
+      height: 420px;
+    }
+    
+    #close {
+      opacity: 0.7;
+      position: absolute;
+      border: 1px solid #333;
+      background-color: #222;
+      -moz-border-radius: 8px;
+      -webkit-border-radius: 8px;
+      color: #777;
+      height: 30px;
+      width: 100px;
+      top: 100%;
+      margin-top: -50px;
+      left: 50%;
+      margin-left: -50px;
+    }
+    
+    #close:hover {
+      opacity: 1;
+    }
+    
+    #galleryButtons {
+      display: none;
+    }
+    
+    .galleryButton {
+      opacity: 0.5;
+      border: 1px solid #73a98c;
+      background-color: #8ebaa2;
+      -moz-border-radius: 8px;
+      -webkit-border-radius: 8px;
+      color: #FFF;
+      font-weight: bold;
+      font-size: .8em;
+      height: 30px;
+      width: 100px;
+      margin-top: 10px;
+      margin-left: 10px;
+    }  
+    
+    .galleryButton:hover {
+      opacity: 1;
+    }  
+    
+    #galleryName {
+      font-family: "Tahoma";
+      font-weight: bold;
+      color: #555;
+      font-size: 2em;
+      position: absolute;
+      top: 70px;
+      left: 20px;
+      z-index: 2;
+    }
+    
+    #likebutton {
+      margin: 10px 10px 0px;
     }
   </style>
 </head>
 <body>
+<div id="overlay">
+  <div id="galleryName"></div>
+  <div id="galleria"></div> 
+  <input type="button" id="close" value="Close" onclick="closeGallery();" />
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="galleria/galleria.js"></script>
+<script src="jquery.shuffle.js"></script>
+<script>
+  Galleria.loadTheme('galleria/themes/classic/galleria.classic.js');
+
+  var albums = [ 155533561124914 , 155530174458586 ];
+  var albumNames = [ "Kids" , "Family" , "Love" ];
+  
+  function showGallery(num) {
+
+    $('#overlay').animate({
+      'margin-top': '-2000px'
+    },500, function() {} );    
+    
+    var url = 'http://graph.facebook.com/' + albums[num] + '/photos?callback=?';
+    $.getJSON(
+      url,
+      function(data) {
+        var photos = [];
+        data = $.shuffle(data.data);        
+        for(var k in data) {
+
+          var photo = {
+            image : data[k].source,
+            thumb : null,
+            title : data[k].title,
+            description : null,
+            link : null
+          };
+          photos.push(photo);
+        }
+
+        $('#overlay').css('margin-top','-2000px');
+        $('#overlay').show();
+        $('#galleryName').html(albumNames[num]);
+        $('#galleryButtons').show();
+        $('#overlay').animate({
+          'margin-top': '-50px'
+        },500, function() {});
+        
+        $('#galleria').galleria({
+          autoplay: true,
+          clicknext: true,
+          image_crop: 'height',
+          transition: 'slide',
+          data_source: photos
+        });
+    });  
+  };
+  
+  function closeGallery() {
+    $('#galleryButtons').hide();        
+    $('#overlay').animate({
+      'margin-top': '-2000px'
+    },500, function() { 
+      $('#galleria').html('');
+      $('#overlay').hide();
+    });
+  }
+</script>
+<iframe id="likebutton" src="http://www.facebook.com/plugins/like.php?href=http://dmphotography.me&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
 <center>
   <div id="logo">
     <img id="logo" src="images/logo.png" /><br/>
     <div id="navbar">
-      COMING SOON
+      about me &middot;
+      contact &middot;
+      pricing &middot;
+      <a href="http://www.facebook.com/dmphotography.me" target="_blank">facebook</a> &middot;
+      <a href="#" onclick="showGallery(0); return false;">gallery</a>
     </div>
   </div>
 </center>
 <div id="bottom">
+  <div id="galleryButtons">
+      <input type="button" class="galleryButton" value="Kids" onclick="showGallery(0);" />
+      <input type="button" class="galleryButton" value="Family" onclick="showGallery(1);" />      
+      <input type="button" class="galleryButton" value="Love" onclick="showGallery(2);" />            
+  </div>
 </div>
 </body>
 </html>
