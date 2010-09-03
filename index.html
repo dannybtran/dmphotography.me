@@ -4,6 +4,7 @@
   <title>dm photography</title>
   <style>
     html { height: 100%; }
+    
     body {
       width: 100%; height: 100%; 
       margin: 0px; padding: 0px;
@@ -39,6 +40,7 @@
     #navbar a {
       text-decoration: none;
       color: #AAA;
+      outline: none;
     }
     
     #navbar a:hover {
@@ -84,6 +86,12 @@
       z-index: 0;
     }
     
+    #gallery {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    
     #galleria {
       position: relative;
       top: 50%;
@@ -117,6 +125,8 @@
     #galleryButtons {
       display: none;
     }
+
+    input::-moz-focus-inner { border: 0; }    
     
     .galleryButton {
       opacity: 0.5;
