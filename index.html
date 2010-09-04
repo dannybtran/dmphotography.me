@@ -2,219 +2,7 @@
 <html>
 <head>
   <title>dm photography</title>
-  <style>
-    html { height: 100%; }
-    
-    body {
-      width: 100%; height: 100%; 
-      margin: 0px; padding: 0px;
-      background: -webkit-gradient(
-        linear, center top, center bottom,
-        color-stop(.3, #FFF),
-        color-stop(1, #CCC)      
-        );
-      background: -moz-linear-gradient(
-        center top,
-        #FFF 30%,      
-        #CCC 100%
-      );       
-    }
-    div#logo {
-      position: absolute;
-      width: 400px;
-      top: 50%;
-      left: 50%;
-      margin-left: -200px;
-      margin-top: -100px;
-      font-size: .8em;
-      font-family: "Tahoma";
-      color: #777;
-    }
-    
-    #navbar {
-      border-top: 1px solid #DEDEDE;
-      padding-top: 10px;
-      color: #AAA;
-    }
-    
-    #navbar a {
-      text-decoration: none;
-      color: #AAA;
-      outline: none;
-    }
-    
-    #navbar a:hover {
-      text-decoration: none;
-      color: #777;
-    }
-    #bottom {
-      position: absolute;
-      top: 100%;
-      width: 100%;
-      height: 50px;
-      margin-top: -50px;
-      background-color: #8cbaa4;
-      background: -webkit-gradient(
-        linear, center top, center bottom,
-        color-stop(0, #8cbaa4),
-        color-stop(1, #73a68f)      
-        );
-      background: -moz-linear-gradient(
-        center top,
-        #8cbaa4 0%,      
-        #73a68f 100%
-      );             
-    }
-    
-    #overlay {
-      display: none;
-      width: 100%;
-      height: 100%;
-      margin-top: -50px;
-      position: absolute;
-      top: 0%; left: 0%;
-      background-color: transparent;
-      z-index: 1;
-    }
-    
-    #shadow {
-      position: absolute;
-      top: 0%; left: 0%;
-      background-color: #000;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-    
-    #gallery {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-    
-    #galleria {
-      position: relative;
-      top: 50%;
-      margin-top: -200px;
-      left: 50%;
-      margin-left: -400px;  
-      width: 800px;
-      height: 420px;
-    }
-    
-    #close {
-      opacity: 0.7;
-      position: absolute;
-      border: 1px solid #333;
-      background-color: #222;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      color: #777;
-      height: 30px;
-      width: 100px;
-      top: 100%;
-      margin-top: -50px;
-      left: 50%;
-      margin-left: -50px;
-    }
-    
-    #close:hover {
-      opacity: 1;
-    }
-    
-    #galleryButtons {
-      display: none;
-    }
-
-    input::-moz-focus-inner { border: 0; }    
-    
-    .galleryButton {
-      opacity: 0.5;
-      border: 1px solid #000;
-      background-color: #333;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      color: #FFF;
-      font-weight: bold;
-      font-size: .8em;
-      height: 30px;
-      width: 100px;
-      margin-top: 10px;
-      margin-left: 10px;
-    }  
-    
-    .galleryButton:hover {
-      opacity: 1;
-    }  
-    
-    #galleryName {
-      font-family: "Tahoma";
-      font-weight: bold;
-      color: #555;
-      font-size: 2em;
-      position: absolute;
-      top: 70px;
-      left: 20px;
-      z-index: 2;
-    }
-    
-    #likebutton {
-      margin: 10px 10px 0px;
-    }
-    
-    #aboutme {
-      position: absolute;
-      width: 800px;
-      border: 5px solid #77a78e;
-      background-color: #8db8a1;
-      -webkit-border-radius: 15px;
-      -moz-border-radius: 15px;
-      padding: 15px;
-      top: 50%;
-      left: 50%;
-      margin-top: -150px;
-      margin-left: -400px;
-      display: none;
-      font-size: 1em;
-      line-height: 1.3em;
-      letter-spacing: 0.06em;
-      font-family: "Tahoma";
-      color :#FFF;
-    }
-    
-    #contact {
-      position: absolute;
-      width: 800px;
-      border: 5px solid #9d4e91;
-      background-color: #c992c1;
-      -webkit-border-radius: 15px;
-      -moz-border-radius: 15px;
-      padding: 15px;
-      top: 50%;
-      left: 50%;
-      margin-top: -150px;
-      margin-left: -400px;
-      display: none;
-      font-size: 1em;
-      line-height: 1.3em;
-      letter-spacing: .12em;
-      font-family: "Tahoma";
-      color :#FFF;
-    }    
-    
-    #contact a {
-      text-decoration: none;      
-      color: #FFF;
-      font-weight: bold;
-    }
-    
-    #contact a:hover {
-      color: #777;
-    }
-    
-    #aboutme h3 { margin-top: 0px; }
-    #aboutmeImage, #contactImage { margin-right: 20px; border: 1px solid #FFF; padding: 3px; }
-  </style>
+  <link rel="stylesheet" href="assets/index.min.css.cgz" />
 </head>
 <body>
 <div id="overlay">
@@ -224,7 +12,12 @@
   <div id="gallery">
     <div id="galleria"></div> 
   </div>
-  <div id="aboutme">
+  <div id="pricing" class="subsection">
+<p>Wedding packages start at $1000 and only 2 weddings are booked per month in order to give the <b>utmost attention</b> to each couple and the wedding experience.</p>
+<p>Email, call or send me a <a href="http://www.facebook.com/profile.php?id=62006451" target="_blank">facebook message</a> and I will be happy to send you the full price list.<p>
+<p>Also you can view my most current work on the <a href="http://www.facebook.com/dmphotography.me" target="_blank">dm Photography</a> facebook page...thanks for stopping by!</p>
+  </div>  
+  <div id="aboutme" class="subsection">
     <img id="aboutmeImage" src="images/aboutme.jpg" align="left" />
 <h3><b>I love...</b></h3>
 Jesus...<br/>
@@ -240,7 +33,7 @@ Watching my baby boy sleep...<br/>
 White chocolate anything...<br/>
 Meeting wonderful people and then getting to take their picture...<br/>
   </div>
-  <div id="contact">
+  <div id="contact" class="subsection">
     <img id="contactImage" src="images/contact.jpg" align="left" />    
     Dana Murphy<br/>
     (318) 792-4094<br/>
@@ -252,85 +45,7 @@ Meeting wonderful people and then getting to take their picture...<br/>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script src="galleria/galleria.js"></script>
 <script src="jquery.shuffle.js"></script>
-<script>
-  Galleria.loadTheme('galleria/themes/classic/galleria.classic.js');
-
-  var albums = [ 155533561124914 , 155530174458586 , 155643997780537];
-  var albumNames = [ "Kids" , "Family" , "Love" ];
-
-  function hideOverlay(cb) {
-    $('#overlay').animate({
-      'margin-top': '-2000px'
-    },500, function() { if(cb) cb(); } );        
-  };
-  
-  function showOverlay(cb) {
-    $('#overlay').css('margin-top','-2000px');
-    $('#overlay').show();    
-    $('#overlay').animate({
-      'margin-top': '-50px'
-    },500, function() { if(cb) cb(); });    
-  };
-  
-  function showGallery(num) {
-    hideOverlay();
-    $('#gallery').show();
-    var url = 'http://graph.facebook.com/' + albums[num] + '/photos?callback=?';
-    $.getJSON(
-      url,
-      function(data) {
-        var photos = [];
-        data = $.shuffle(data.data);        
-        for(var k in data) {
-
-          var photo = {
-            image : data[k].source,
-            thumb : null,
-            title : data[k].title,
-            description : null,
-            link : null
-          };
-          photos.push(photo);
-        }
-
-        $('#galleryName').html(albumNames[num]);
-        $('#galleryButtons').show();
-        $('#shadow').css('opacity','1');        
-        showOverlay(); 
-        
-        $('#galleria').galleria({
-          autoplay: true,
-          clicknext: true,
-          image_crop: 'height',
-          transition: 'slide',
-          data_source: photos
-        });
-    });  
-  };
-  
-  function showAboutMe() {
-    $('#galleryName').html("About Me");    
-    $('#shadow').css('opacity','1');
-    $('#aboutme').show();  
-    showOverlay();
-  };
-  
-  function showContact() {
-    $('#galleryName').html("Contact");        
-    $('#shadow').css('opacity','1');
-    $('#contact').show();  
-    showOverlay();
-  };
-    
-  function closeOverlay() {
-    $('#gallery').hide();
-    $('#aboutme').hide();
-    $('#contact').hide();    
-    $('#galleryButtons').hide();        
-    hideOverlay();
-  };
-  
-</script>
+<script src="assets/index.min.js.jgz"></script>
 <iframe id="likebutton" src="http://www.facebook.com/plugins/like.php?href=http://dmphotography.me&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
 <center>
   <div id="logo">
@@ -338,7 +53,7 @@ Meeting wonderful people and then getting to take their picture...<br/>
     <div id="navbar">
       <a href="#" onclick="showAboutMe(); return false;">about me</a> &middot;
       <a href="#" onclick="showContact(); return false;">contact</a> &middot;
-      pricing &middot;
+      <a href="#" onclick="showPricing(); return false;">pricing</a> &middot;
       <a href="http://www.facebook.com/dmphotography.me" target="_blank">facebook</a> &middot;
       <a href="#" onclick="showGallery(1); return false;">gallery</a>
     </div>

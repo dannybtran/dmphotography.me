@@ -1,0 +1,5 @@
+AddType "text/stylesheet" .css.cgz
+AddType "text/javascript" .js.jgz
+AddEncoding gzip .jgz
+AddEncoding gzip .cgz
+

@@ -1,0 +1,6 @@
+java -jar ~/Projects/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar index.js | tr -d "\n" > index.min.js
+java -jar ~/Projects/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar index.css | tr -d "\n" > index.min.css
+gzip index.min.js
+gzip index.min.css
+mv index.min.js.gz index.min.js.jgz
+mv index.min.css.gz index.min.css.cgz
